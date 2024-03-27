@@ -1,0 +1,57 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Branch</h4>
+                <p class="card-description">
+                Update branch from here
+                </p>
+                <form class="forms-sample" action="{% url 'update-branch' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{get_branch_data.id}}">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" value="{{get_branch_data.name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch Code</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="branch_code" value="{{get_branch_data.branch_code}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Entity</label>
+                        <select class="js-example-basic-single w-100" name="entity_id" required>
+                            <option value="" disabled selected>Select Entity</option>
+                            {% for x in entity_data %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_branch_data.entity_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Address</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Address" name="address" value="{{get_branch_data.address}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">City</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="City" name="city" value="{{get_branch_data.city}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">State</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="State" name="state" value="{{get_branch_data.state}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Country</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Country" name="country" value="{{get_branch_data.country}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Pincode</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Pincode" name="pincode" value="{{get_branch_data.pincode}}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

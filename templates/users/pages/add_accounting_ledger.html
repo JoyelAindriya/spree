@@ -1,0 +1,52 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Accounting Ledger</h4>
+                <p class="card-description">
+                Add new accounting ledger from here
+                </p>
+                <form class="forms-sample" action="{% url 'add-accounting-ledger' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Accounting Group</label>
+                        <select class="js-example-basic-single w-100" name="accounting_group_id" required>
+                            <option value="" disabled selected>Select Accounting Group</option>
+                            {% for x in list_all_group %}
+                            <option value="{{x.id}}">{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Opening Balance</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Opening Balance" name="opening_balance">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Entry Type</label>
+                        <select class="js-example-basic-single w-100" name="entry_type">
+                            <option value="" disabled selected>Entry Type</option>
+                            <option value="Dr">Dr</option>
+                            <option value="Cr">Cr</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Bill by bill</label>
+                        <select class="js-example-basic-single w-100" name="bill_by_bill">
+                            <option value="" disabled selected>Bill by bill</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

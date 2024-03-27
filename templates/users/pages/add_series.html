@@ -1,0 +1,31 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Series</h4>
+                <p class="card-description">
+                Add new series year from here
+                </p>
+                <form class="forms-sample" action="{% url 'add-series' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputName1">Type</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Type" name="type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Pre Text</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Pre Text" name="pre_text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Post Text</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Post Text" name="post_text" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

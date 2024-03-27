@@ -1,0 +1,161 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Supplier</h4>
+                <p class="card-description">
+                Add new supplier from here
+                </p>
+                <form class="forms-sample" action="{% url 'add-supplier' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-check form-check-primary">
+                            <label class="form-check-label">
+                                Active
+                                <input type="checkbox" class="form-check-input"  id="checkBox" name="active" value="true" checked>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch</label>
+                        <select class="js-example-basic-single w-100" name="branch_id" required>
+                            <option value="" disabled selected>Select Branch</option>
+                            {% for x in list_branch %}
+                            <option value="{{x.id}}">{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Type</label>
+                        <select class="js-example-basic-single w-100" name="supplier_type_id" required>
+                            <option value="" disabled selected>Select Customer Type</option>
+                            {% for x in list_supplier_type %}
+                            <option value="{{x.id}}">{{x.type}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Supplier Code</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Supplier Code" name="supplier_code" value="{{supplier_code}}" required>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Accounting</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">Opening Balance</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Opening Balance" name="opening_balance">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Entry Type</label>
+                    <select class="js-example-basic-single w-100" name="entry_type">
+                        <option value="" disabled selected>Entry Type</option>
+                        <option value="Dr">Dr</option>
+                        <option value="Cr">Cr</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Bill by bill</label>
+                    <select class="js-example-basic-single w-100" name="bill_by_bill">
+                        <option value="" disabled selected>Bill by bill</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Credit Period</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Credit Period" name="credit_period">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Credit Limit</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Credit Limit" name="credit_limit">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Contact Details</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">Address</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Address" name="address">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">City</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="City" name="city">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">State</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="State" name="state">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Country</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Country" name="country">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Pincode</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Pincode" name="pincode">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputName1" placeholder="Email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">phone</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Phone" name="phone">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bank</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">Account Number</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Account Number" name="account_number">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Branch Name</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Branch Name" name="branch_name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Branch Code</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Branch Code" name="branch_code">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Other</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">TIN</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="TIN" name="tin">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">PAN</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="PAN" name="pan">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">CST</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="CST" name="cst">
+                </div>
+                <button type="submit" class="btn btn-primary me-2">Submit</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Pricing Level</h4>
+                <p class="card-description">
+                Add new pricing level from here
+                </p>
+                <form class="forms-sample" action="{% url 'add-pricing-level' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch</label>
+                        <select class="js-example-basic-single w-100" name="branch_id" required>
+                            <option value="" disabled selected>Select Branch</option>
+                            {% for x in list_branch %}
+                            <option value="{{x.id}}">{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleTextarea1" placeholder="Description" name="description" rows="4"></textarea>
+                      </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

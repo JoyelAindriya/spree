@@ -1,0 +1,36 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Unit</h4>
+                <p class="card-description">
+                Update unit from here
+                </p>
+                <form class="forms-sample" action="{% url 'update-unit' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{get_data.id}}">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Unit</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Unit" name="unit" value="{{get_data.unit}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleTextarea1" placeholder="Description" name="description" rows="4">{{get_data.description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Formal Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Formal Name" name="formal_name" value="{{get_data.formal_name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Number Of Decimal Places</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Number Of Decimal Places" name="no_of_decimal_place" value="{{get_data.no_of_decimal_place}}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

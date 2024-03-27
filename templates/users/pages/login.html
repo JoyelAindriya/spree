@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Spree Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/admin/images/Fav New.png" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/login/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/login/main.css">
+
+    <link rel="stylesheet" href="/static/admin/vendors/feather/feather.css">
+    <link rel="stylesheet" href="/static/admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/admin/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/static/admin/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="/static/admin/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="/static/admin/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="/static/admin/js/select.dataTables.min.css">
+    <link rel="stylesheet" href="/static/admin/css/vertical-layout-light/style.css">
+    
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+                <form class="login100-form"  action="{% url 'user-login' %}" method="post">
+                    {% csrf_token %}
+                    <span class="login100-form-title p-b-55">
+                        <b>Login</b>
+                        <div class="mt-3">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'error' %}
+                                    <div class="alert {% if message.tags %}alert-danger{% endif %}" role="alert">{{ message }}</div>
+                                    {% else %}
+                                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </span>
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <input class="input100" type="email" name="email" placeholder="Email" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <span class="lnr lnr-envelope"></span>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <input class="input100" type="password" name="password" placeholder="Password" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <span class="lnr lnr-lock"></span>
+                        </span>
+                    </div>
+                    <div class="contact100-form-checkbox m-l-4">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+
+                    </div>
+                    <div class="container-login100-form-btn p-t-25">
+                        <button type="submit" class="login100-form-btn">
+                        Login
+                        </button>
+                    </div>
+                    <div class="text-center w-full p-t-115">
+                        <span class="txt1">
+                            Not a member?
+                        </span>
+                        <a class="txt1 bo1 hov1" href="#">
+                        Sign up now
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".alert").fadeTo(8000, 1000).slideUp(900, function(){
+                $(".alert").slideUp(900);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Product</h4>
+                <p class="card-description">
+                Update product from here
+                </p>
+                <form class="forms-sample" action="{% url 'update-product' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{get_data.id}}">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch</label>
+                        <select class="js-example-basic-single w-100" name="branch_id" required>
+                            <option value="" disabled selected>Select Branch</option>
+                            {% for x in list_branch %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.branch_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" value="{{get_data.name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Product Code</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Product Code" name="product_code" value="{{get_data.product_code}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Product Group</label>
+                        <select class="js-example-basic-single w-100" name="product_group_id" required>
+                            <option value="" disabled selected>Select Product Group</option>
+                            {% for x in list_product_group %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.product_group_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Brand</label>
+                        <select class="js-example-basic-single w-100" name="brand_id">
+                            <option value="" disabled selected>Select Product Group</option>
+                            {% for x in list_brand %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.brand_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Unit</label>
+                        <select class="js-example-basic-single w-100" name="unit_id">
+                            <option value="" disabled selected>Select Product Unit</option>
+                            {% for x in list_unit %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.unit_id.id|slugify %} selected {% endif %}>{{x.formal_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Size</label>
+                        <select class="js-example-basic-single w-100" name="size_id">
+                            <option value="" disabled selected>Select Product Size</option>
+                            {% for x in list_size %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.size_id.id|slugify %} selected {% endif %}>{{x.size}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Model Number</label>
+                        <select class="js-example-basic-single w-100" name="model_number_id">
+                            <option value="" disabled selected>Select Product Model Number</option>
+                            {% for x in list_model_numbers %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.model_number_id.id|slugify %} selected {% endif %}>{{x.model_number}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Godown</label>
+                        <select class="js-example-basic-single w-100" name="godown_id">
+                            <option value="" disabled selected>Select Godown</option>
+                            {% for x in list_godown %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.godown_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Rack</label>
+                        <select class="js-example-basic-single w-100" name="rack_id">
+                            <option value="" disabled selected>Select Rack</option>
+                            {% for x in list_rack %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.rack_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Purchase Rate</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Purchase Rate" name="purchase_rate" value="{{get_data.purchase_rate}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">MRP</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="MRP" name="mrp" value="{{get_data.mrp}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Sales Rate</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Sales Rate" name="sales_rate" value="{{get_data.sales_rate}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Reorder Level</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Reorder Level" name="reorder_level" value="{{get_data.reorder_level}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Minimum Stock</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Minimum Stock" name="minimum_stock" value="{{get_data.minimum_stock}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Maximum Stock</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Maximum Stock" name="maximum_stock" value="{{get_data.maximum_stock}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Tax</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Tax" name="tax" value="{{get_data.tax}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">BOM</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="BOM" name="bom" value="{{get_data.bom}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Barcode</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Barcode" name="barcode" value="{{get_data.barcode}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

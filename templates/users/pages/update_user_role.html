@@ -1,0 +1,28 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Entity Type</h4>
+                <p class="card-description">
+                Update entity type from here
+                </p>
+                <form class="forms-sample" action="{% url 'update-user-role' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{role_data.id}}">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Type</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Role" name="role" value="{{role_data.role}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleTextarea1" placeholder="Description" name="description" rows="4">{{role_data.description}}</textarea>
+                      </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

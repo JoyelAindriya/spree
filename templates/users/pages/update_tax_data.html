@@ -1,0 +1,49 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Tax</h4>
+                <p class="card-description">
+                Update tax from here
+                </p>
+                <form class="forms-sample" action="{% url 'update-tax-data' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{get_data.id}}">
+                    <div class="form-group">
+                        <div class="form-check form-check-primary">
+                            <label class="form-check-label">
+                                Active
+                                <input type="checkbox" class="form-check-input"  id="checkBox" name="active" value="true" {% if get_data.active == True %} checked {% endif %}>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch</label>
+                        <select class="js-example-basic-single w-100" name="branch_id" required>
+                            <option value="" disabled selected>Select Branch</option>
+                            {% for x in list_branch %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.branch_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Tax</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Tax" name="tax" value="{{get_data.tax}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Rate(%)</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Rate(%)" name="rate_perc" value="{{get_data.rate_perc}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleTextarea1" placeholder="Description" name="description" rows="4">{{type_data.description}}</textarea>
+                      </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

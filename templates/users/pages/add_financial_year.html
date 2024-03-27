@@ -1,0 +1,36 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Financial Year</h4>
+                <p class="card-description">
+                Add new financial year from here
+                </p>
+                <form class="forms-sample" action="{% url 'add-financial-year' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch</label>
+                        <select class="js-example-basic-single w-100" name="branch_id" required>
+                            <option value="" disabled selected>Select Branch</option>
+                            {% for x in list_branch %}
+                            <option value="{{x.id}}">{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">From Date</label>
+                        <input type="date" class="form-control" id="exampleInputName1" placeholder="From Date" name="from_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">To Date</label>
+                        <input type="date" class="form-control" id="exampleInputName1" placeholder="To Date" name="to_date" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

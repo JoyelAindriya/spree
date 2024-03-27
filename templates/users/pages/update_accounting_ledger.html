@@ -1,0 +1,53 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Accounting Group</h4>
+                <p class="card-description">
+                Update accounting group from here
+                </p>
+                <form class="forms-sample" action="{% url 'update-accounting-ledger' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{get_data.id}}">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" value="{{get_data.name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Accounting Group</label>
+                        <select class="js-example-basic-single w-100" name="accounting_group_id" required>
+                            <option value="" disabled selected>Select Accounting Group</option>
+                            {% for x in list_all_group %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.accounting_group_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Opening Balance</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Opening Balance" name="opening_balance" value="{{get_data.opening_balance}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Entry Type</label>
+                        <select class="js-example-basic-single w-100" name="entry_type">
+                            <option value="" disabled selected>Entry Type</option>
+                            <option value="Dr" {% if get_data.get_data.entry_type == 'Dr' %} selected {% endif %}>Dr</option>
+                            <option value="Cr" {% if get_data.get_data.entry_type == 'Cr' %} selected {% endif %}>Cr</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Bill by bill</label>
+                        <select class="js-example-basic-single w-100" name="bill_by_bill">
+                            <option value="" disabled selected>Bill by bill</option>
+                            <option value="Yes" {% if get_data.get_data.bill_by_bill == 'Yes' %} selected {% endif %}>Yes</option>
+                            <option value="No" {% if get_data.get_data.bill_by_bill == 'No' %} selected {% endif %}>No</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

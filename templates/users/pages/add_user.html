@@ -1,0 +1,55 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add User</h4>
+                <p class="card-description">
+                Add new user from here
+                </p>
+                <form class="forms-sample" action="{% url 'add-user' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputName1" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">User Role</label>
+                        <select class="js-example-basic-single w-100" name="user_role_id" required>
+                            <option value="" disabled selected>Select User Role</option>
+                            {% for x in get_user_roles %}
+                            <option value="{{x.id}}">{{x.role}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch</label>
+                        <select class="js-example-basic-single w-100" name="branch_id" required>
+                            <option value="" disabled selected>Select Branch</option>
+                            {% for x in list_branch %}
+                            <option value="{{x.id}}">{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Profile Image</label>
+                        <input type="file" name="image" class="file-upload-default" id="image">
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Profile Image" style="height: 45px;">
+                            <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

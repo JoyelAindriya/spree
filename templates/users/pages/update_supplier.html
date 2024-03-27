@@ -1,0 +1,162 @@
+{% extends "users/layout/app.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Supplier</h4>
+                <p class="card-description">
+                Update supplier from here
+                </p>
+                <form class="forms-sample" action="{% url 'update-supplier' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{get_data.id}}">
+                    <div class="form-group">
+                        <div class="form-check form-check-primary">
+                            <label class="form-check-label">
+                                Active
+                                <input type="checkbox" class="form-check-input"  id="checkBox" name="active" value="true" {% if get_data.active == True %} checked {% endif %}>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Branch</label>
+                        <select class="js-example-basic-single w-100" name="branch_id" required>
+                            <option value="" disabled selected>Select Branch</option>
+                            {% for x in list_branch %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.branch_id.id|slugify %} selected {% endif %}>{{x.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Type</label>
+                        <select class="js-example-basic-single w-100" name="supplier_type_id" required>
+                            <option value="" disabled selected>Select Supplier Type</option>
+                            {% for x in list_supplier_type %}
+                            <option value="{{x.id}}" {% if x.id|slugify == get_data.supplier_type_id.id|slugify %} selected {% endif %}>{{x.type}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name" value="{{get_data.name}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Supplier Code</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Supplier Code" name="supplier_code" value="{{get_data.supplier_code}}" required>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Accounting</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">Opening Balance</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Opening Balance" name="opening_balance" value="{{get_data.opening_balance}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Entry Type</label>
+                    <select class="js-example-basic-single w-100" name="entry_type">
+                        <option value="" disabled selected>Entry Type</option>
+                        <option value="Dr" {% if get_data.get_data.entry_type == 'Dr' %} selected {% endif %}>Dr</option>
+                        <option value="Cr" {% if get_data.get_data.entry_type == 'Cr' %} selected {% endif %}>Cr</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Bill by bill</label>
+                    <select class="js-example-basic-single w-100" name="bill_by_bill">
+                        <option value="" disabled selected>Bill by bill</option>
+                        <option value="Yes" {% if get_data.get_data.bill_by_bill == 'Yes' %} selected {% endif %}>Yes</option>
+                        <option value="No" {% if get_data.get_data.bill_by_bill == 'No' %} selected {% endif %}>No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Credit Period</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Credit Period" name="credit_period" value="{{get_data.credit_period}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Credit Limit</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Credit Limit" name="credit_limit" value="{{get_data.credit_limit}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Contact Details</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">Address</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Address" name="address" value="{{get_data.address}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">City</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="City" name="city" value="{{get_data.city}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">State</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="State" name="state" value="{{get_data.state}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Country</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Country" name="country" value="{{get_data.country}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Pincode</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Pincode" name="pincode" value="{{get_data.pincode}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputName1" placeholder="Email" name="email" value="{{get_data.email}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">phone</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Phone" name="phone" value="{{get_data.phone}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bank</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">Account Number</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Account Number" name="account_number" value="{{get_data.account_number}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Branch Name</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Branch Name" name="branch_name" value="{{get_data.branch_name}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Branch Code</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Branch Code" name="branch_code" value="{{get_data.branch_code}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Other</h4>
+                <div class="form-group">
+                    <label for="exampleInputName1">TIN</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="TIN" name="tin" value="{{get_data.tin}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">PAN</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="PAN" name="pan" value="{{get_data.pan}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">CST</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="CST" name="cst" value="{{get_data.cst}}">
+                </div>
+                <button type="submit" class="btn btn-primary me-2">Submit</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
